@@ -169,17 +169,30 @@ class DList:
         else:
             index = 0
             node = self.head
+            newNode = DListNode(x)
             for i in range(self.size):
                 if i != 0:
                     node = node.next
 
-                if index == position:
 
-                    if position < 0:
-                        tempNode = node.next
-                        self.head = node
-                        node.next = tempNode
-                        tempNode.prev = node
+                if position < 0:
+
+                    node.prev = newNode
+                    newNode.next = node
+                    self.head = newNode
+                    self.size += 1
+                    break
+
+                elif index == position:
+                    prevNode = node.prev
+                    newNode.prev = node.prev
+                    node.prev = newNode
+                    newNode.next = node
+                    prevNode.next = newNode
+                    self.size += 1
+                    break
+
+
                 else:
                     index += 1
 
