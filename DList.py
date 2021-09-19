@@ -8,6 +8,7 @@
 
 from collections.abc import Iterable
 from DListNode import *
+from copy import *
 
 
 class DList:
@@ -302,7 +303,7 @@ class DList:
         :param seq: the iterable sequence to add its items on the list
         :return: None
         """
-
+        new = copy(seq)
         for i in seq:
 
             self.append(i)

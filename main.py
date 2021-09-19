@@ -12,16 +12,17 @@ a.insert(-3, 10)
 
 a.insert(6, 7)
 
-print(a[0])
-print(a[1])
-print(a[2])
-print(a[3])
-print(a[4])
-print("\n")
 
-del a[2]
-print(a[0])
-print(a[1])
-print(a[2])
-print(a[3])
+for i in a:
+    print(i)
+
+b = DList()
+
+b.insert(5, 8)
+
+b.insert(6, 9)
+
+print()
+for i in b:
+    print(i)
 
