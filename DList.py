@@ -111,7 +111,7 @@ class DList:
         :param position: index of item/node to delete
         :return: None
         """
-        pass
+        a = self._delete(position)
 
     # ------------------------------------------------------------------
 
@@ -122,7 +122,41 @@ class DList:
         :param position:index of item/node to delete
         :return: the value at the specified position that was removed
         """
-        pass
+
+        if position < 0 or position > self.size - 1:
+            raise IndexError
+
+        # finds the node at the index
+        node = self._find(position)
+        item = node.item
+
+        # if removing the head
+        if position == 0:
+            tempNode = node.next
+            node.next = None
+            tempNode.prev = None
+            self.head = tempNode
+            self.size -= 1
+
+        # if removing the tail
+        elif position == self.size - 1:
+            tempNode = node.prev
+            node.prev = None
+            tempNode.next = None
+            self.tail = tempNode
+            self.size -= 1
+
+        else:
+            prevNode = node.prev
+            nextNode = node.next
+            node.next = None
+            node.prev = None
+            prevNode.next = nextNode
+            nextNode.prev = prevNode
+            self.size -= 1
+
+        return item
+
 
     # ------------------------------------------------------------------
 
@@ -131,6 +165,8 @@ class DList:
         removes all element from the list
         :return: None
         """
+        self.tail = None
+        self.head = None
 
     # ------------------------------------------------------------------
 
@@ -174,9 +210,7 @@ class DList:
                 if i != 0:
                     node = node.next
 
-
                 if position < 0:
-
                     node.prev = newNode
                     newNode.next = node
                     self.head = newNode
@@ -192,12 +226,8 @@ class DList:
                     self.size += 1
                     break
 
-
                 else:
                     index += 1
-
-
-
 
 
     # ------------------------------------------------------------------
@@ -208,7 +238,11 @@ class DList:
         :param position: index to remove at
         :return: value that was removed
         """
-        pass
+        if position == -1:
+            position = self.size - 1
+
+        item = self._delete(position)
+        return item
 
     # ------------------------------------------------------------------
 
@@ -259,6 +293,7 @@ class DList:
                 count += 1
 
         return count
+
     # ------------------------------------------------------------------
 
     def extend(self, seq: Iterable):
@@ -267,7 +302,9 @@ class DList:
         :param seq: the iterable sequence to add its items on the list
         :return: None
         """
+
         for i in seq:
+
             self.append(i)
 
     # ------------------------------------------------------------------
