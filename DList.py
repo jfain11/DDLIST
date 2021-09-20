@@ -8,7 +8,6 @@
 
 from collections.abc import Iterable
 from DListNode import *
-from copy import *
 
 
 class DList:
@@ -199,36 +198,32 @@ class DList:
         :param x: value to insert at the specified position
         :return: None
         """
+        
         if self.size == 0:
             self.append(x)
         elif position > self.size - 1:
             self.append(x)
         else:
-            index = 0
-            node = self.head
+            node = self._find(position)
             newNode = DListNode(x)
-            for i in range(self.size):
-                if i != 0:
-                    node = node.next
 
-                if position < 0:
-                    node.prev = newNode
-                    newNode.next = node
-                    self.head = newNode
-                    self.size += 1
-                    break
+            if position < 0:
+                node = self.head
+                node.prev = newNode
+                newNode.next = node
+                self.head = newNode
+                self.size += 1
 
-                elif index == position:
-                    prevNode = node.prev
-                    newNode.prev = node.prev
-                    node.prev = newNode
-                    newNode.next = node
-                    prevNode.next = newNode
-                    self.size += 1
-                    break
 
-                else:
-                    index += 1
+            else:
+                prevNode = node.prev
+                newNode.prev = node.prev
+                node.prev = newNode
+                newNode.next = node
+                prevNode.next = newNode
+                self.size += 1
+
+
 
 
     # ------------------------------------------------------------------
@@ -253,7 +248,10 @@ class DList:
         :param x: the value to remove from the list
         :return: None
         """
-        pass
+        index = self.index(x)
+        if index == -1:
+            raise ValueError(f"The value {x} is not in the list")
+        self._delete(index)
 
     # ------------------------------------------------------------------
 
@@ -274,6 +272,8 @@ class DList:
                 return index
             else:
                 index += 1
+
+        return - 1
 
 
     # ------------------------------------------------------------------
@@ -303,10 +303,13 @@ class DList:
         :param seq: the iterable sequence to add its items on the list
         :return: None
         """
-        new = copy(seq)
+        new = DList()
         for i in seq:
+            new.append(i)
 
+        for i in new:
             self.append(i)
+
 
     # ------------------------------------------------------------------
 
