@@ -278,8 +278,15 @@ class DList:
         :param x: the value to remove from the list
         :return: None
         """
-        index = self.index(x)
-        if index == -1:
+        inList = False
+        index = -1
+        for i in self:
+            index += 1
+            if i == x:
+                inList = True
+                break
+
+        if not inList:
             raise ValueError(f"The value {x} is not in the list")
         self._delete(index)
 
@@ -311,10 +318,6 @@ class DList:
             # if it isn't found, increment index and loop again
             else:
                 index += 1
-
-        # if item not in list, return -1
-        # used specifically in remove()
-        return - 1
 
 
     # ------------------------------------------------------------------
