@@ -151,7 +151,7 @@ class DList:
             self.size -= 1
 
         # if removing the tail
-        elif position == self.size - 1:
+        elif position == self.size - 1 or position == -1:
             tempNode = node.prev
             node.prev = None
             tempNode.next = None
@@ -225,13 +225,13 @@ class DList:
             self.append(x)
 
         else:
-
             # if the position is beyond the beginning, insert position at head
             if position < 0:
                 position = 0
 
             # use _find to retrieve the node at the position
             node = self._find(position)
+
             # make a new DListNode to insert into the list
             newNode = DListNode(x)
 
@@ -261,10 +261,6 @@ class DList:
         :return: value that was removed
         """
 
-        # if the position parameter is not given, then remove the node from the end of the list.
-        if position == -1:
-            position = self.size - 1
-
         # calls _delete to remove the node
         item = self._delete(position)
         # returns the item that was removed
@@ -278,16 +274,25 @@ class DList:
         :param x: the value to remove from the list
         :return: None
         """
+
         inList = False
+        # index accumulator
         index = -1
+
+        # loops through each item in the list
         for i in self:
             index += 1
+
+            # if the value is found, then inList is set to True
+            # otherwise it stays false and raises a ValueError.
             if i == x:
                 inList = True
                 break
 
         if not inList:
             raise ValueError(f"The value {x} is not in the list")
+
+        # calls the _delete method and passes through the index of the item
         self._delete(index)
 
     # ------------------------------------------------------------------
@@ -319,6 +324,8 @@ class DList:
             else:
                 index += 1
 
+        raise ValueError
+
 
     # ------------------------------------------------------------------
 
@@ -327,16 +334,17 @@ class DList:
         :param x: the value to count in the list
         :return: the number of copies of x in the list
         """
+        # accumulator
         count = 0
-        node = self.head
-        for i in range(self.size):
 
-            if i != 0:
-                node = node.next
+        # loops through the items in the DList
+        for i in self:
 
-            if node.item == x:
+            # if a match is found, increment the count
+            if i == x:
                 count += 1
 
+        # after looping through the whole DList, return the count
         return count
 
     # ------------------------------------------------------------------
@@ -347,10 +355,15 @@ class DList:
         :param seq: the iterable sequence to add its items on the list
         :return: None
         """
+        # creates a new DList object
         new = DList()
+
+        # loops through the seq and appends them to the new DList.
+        # this is to prevent an infinite loop if extending an object with itself
         for i in seq:
             new.append(i)
 
+        # appends each item in the new list to self
         for i in new:
             self.append(i)
 

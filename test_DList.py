@@ -111,8 +111,9 @@ class DListTest(unittest.TestCase):
         del items[5]
         del items[2]
         del items[0]
+        del items[-1]
 
-        self.checkList(items, [7, 1, 7])
+        self.checkList(items, [7, 1])
 
 
 
@@ -216,6 +217,9 @@ class DListTest(unittest.TestCase):
 
         index = items.index(14)
         self.assertEqual(index, 4)
+
+        with self.assertRaises(ValueError):
+            index = items.index(21)
 
 # ----------------------------------------------------------------------
 
