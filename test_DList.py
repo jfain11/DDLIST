@@ -50,8 +50,9 @@ class DListTest(unittest.TestCase):
             items.append(x)
         self.checkList(items, [2, 3, 4, 5])
 
-# getItem Tests
 # ------------------------------------------------------------------
+
+# getItem Tests
 
     def testGetItemRaisesIndexError(self):
 
@@ -69,8 +70,9 @@ class DListTest(unittest.TestCase):
         self.assertEqual(items[5], 8)
         self.assertEqual(items[2], 5)
 
+#----------------------------------------------------------------------
+
 # setItem Tests
-# ----------------------------------------------------------------------
 
     def testSetItem(self):
 
@@ -92,9 +94,8 @@ class DListTest(unittest.TestCase):
         items[2] = 9
         self.assertEqual(items[2], 9)
 
-
-    # delItem Tests
 # ----------------------------------------------------------------------
+    # delItem Tests
 
     def testDeleteItem(self):
 
@@ -115,7 +116,7 @@ class DListTest(unittest.TestCase):
 
         self.checkList(items, [7, 1])
 
-
+# ----------------------------------------------------------------------
 
 # clear() Tests
 
@@ -202,6 +203,7 @@ class DListTest(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 # index() Tests
+
     def testIndex(self):
         items = DList()
         items.extend([9, 3, 1, 0, 14, 7, 3])
