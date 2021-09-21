@@ -165,6 +165,7 @@ class DList:
         removes all element from the list
         :return: None
         """
+        # set the head and tail to None, and set the size to 0
         self.tail = None
         self.head = None
         self.size = 0
@@ -199,23 +200,35 @@ class DList:
         :param x: value to insert at the specified position
         :return: None
         """
-        
+
+        # if list is empty, use append
         if self.size == 0:
             self.append(x)
+
+        # if the position is beyond the end, use append
         elif position > self.size - 1:
             self.append(x)
+
         else:
+
+            # if the position is beyond the beginning, insert position at head
+            if position < 0:
+                position = 0
+
+            # use _find to retrieve the node at the position
             node = self._find(position)
+            # make a new DListNode to insert into the list
             newNode = DListNode(x)
 
-            if position < 0:
+            # if inserting at the head
+            if position == 0:
                 node = self.head
                 node.prev = newNode
                 newNode.next = node
                 self.head = newNode
                 self.size += 1
 
-
+            # if inserting in the middle
             else:
                 prevNode = node.prev
                 newNode.prev = node.prev
@@ -223,9 +236,6 @@ class DList:
                 newNode.next = node
                 prevNode.next = newNode
                 self.size += 1
-
-
-
 
     # ------------------------------------------------------------------
 

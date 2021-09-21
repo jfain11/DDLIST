@@ -130,9 +130,60 @@ class DListTest(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 # insert() Tests
+
+    def testInsert(self):
+        items = DList()
+        items.insert(2, 1)
+        self.checkList(items, [1])
+        items.insert(0, 2)
+        self.checkList(items, [2, 1])
+        items.insert(-4, 3)
+        self.checkList(items, [3, 2, 1])
+        items.insert(1, 9)
+        self.checkList(items, [3, 9, 2, 1])
+        items.insert(10, 5)
+        self.checkList(items, [3, 9, 2, 1, 5])
+
+
 # ----------------------------------------------------------------------
 
 # pop() Tests
+
+    def testPop(self):
+        items = DList()
+        items.extend([4, 5, 9, 1, 8, 0, 3])
+
+        a = items.pop(0)
+        self.checkList(items, [5, 9, 1, 8, 0, 3])
+        self.assertEqual(a, 4)
+
+        b = items.pop(5)
+        self.checkList(items, [5, 9, 1, 8, 0])
+        self.assertEqual(b, 3)
+
+        c = items.pop(2)
+        self.checkList(items, [5, 9, 8, 0])
+        self.assertEqual(c, 1)
+
+        d = items.pop(-1)
+        self.checkList(items, [5, 9, 8])
+        self.assertEqual(d, 0)
+
+        with self.assertRaises(IndexError):
+            e = items.pop(10)
+
+        with self.assertRaises(IndexError):
+            e = items.pop(-9)
+
+
+
+
+
+
+
+
+
+
 # ----------------------------------------------------------------------
 
 # remove() Tests
