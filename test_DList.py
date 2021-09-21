@@ -56,26 +56,65 @@ class DListTest(unittest.TestCase):
     def testGetItemRaisesIndexError(self):
 
         items = DList()
-        # how to test if an error is raises
-        # this tests if x = items[0] does raise an IndexError (as it should)
+
+        # Checks to make sure IndexError is raised.
         with self.assertRaises(IndexError):
             x = items[0]
 
+        items.extend([2,4,5,6,7,8])
+
+        # Checks it returns the correct item
+        self.assertEqual(items[-2], 7)
+        self.assertEqual(items[0], 2)
+        self.assertEqual(items[5], 8)
+        self.assertEqual(items[2], 5)
 
 # setItem Tests
 # ----------------------------------------------------------------------
 
-    def testSetItemRaisesIndexError(self):
+    def testSetItem(self):
 
         items = DList()
-        # how to test if an error is raises
-        # this tests if x = items[0] does raise an IndexError (as it should)
+
+        # Checks to make sure IndexError is raised.
         with self.assertRaises(IndexError):
             items[6] = 20
 
+        items.extend([2, 4, 5, 6, 7, 8])
 
-# delItem Tests
+        # Checks the items are set correctly
+        items[-2] = 3
+        self.assertEqual(items[-2], 3)
+        items[0] = 5
+        self.assertEqual(items[0], 5)
+        items[5] = 2
+        self.assertEqual(items[5], 2)
+        items[2] = 9
+        self.assertEqual(items[2], 9)
+
+
+    # delItem Tests
 # ----------------------------------------------------------------------
+
+    def testDeleteItem(self):
+
+        items = DList()
+
+        # Checks to make sure IndexError is raised.
+        with self.assertRaises(IndexError):
+            items[6] = 20
+
+        items.extend([4, 6, 7, 2, 1, 7, 0])
+
+        # Checks it returns the correct item
+        del items[3]
+        self.assertEqual(items[3], 1)
+        del items[-5]
+        self.assertEqual(items[-5], 2)
+        self.assertEqual(items[5], 8)
+        self.assertEqual(items[2], 5)
+
+
 
 # clear() Tests
 # ----------------------------------------------------------------------

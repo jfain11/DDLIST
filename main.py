@@ -2,32 +2,7 @@ from DList import *
 
 a = DList()
 
-a.insert(5, 4)
-a.insert(4, 2)
-a.insert(1, 3)
-a.insert(-3, 10)
-a.insert(6, 7)
+a.extend([4, 6, 7, 2, 1, 7, 0])
 
-for i in a:
-    print(i)
-
-b = DList()
-
-b.insert(5, 8)
-b.insert(6, 9)
-
-print()
-for i in b:
-    print(i)
-
-print()
-
-b.extend(b)
-for i in b:
-    print(i)
-
-b.remove(5)
-print()
-for i in b:
-    print(i)
+del a[-6]
 

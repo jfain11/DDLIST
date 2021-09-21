@@ -123,7 +123,7 @@ class DList:
         :return: the value at the specified position that was removed
         """
 
-        if position < 0 or position > self.size - 1:
+        if position < 0 - self.size or position > self.size - 1:
             raise IndexError
 
         # finds the node at the index
