@@ -131,7 +131,7 @@ class DList:
         item = node.item
 
         # if removing the head
-        if position == 0:
+        if position == 0 or position == 0 - self.size:
             tempNode = node.next
             node.next = None
             tempNode.prev = None
@@ -167,6 +167,7 @@ class DList:
         """
         self.tail = None
         self.head = None
+        self.size = 0
 
     # ------------------------------------------------------------------
 

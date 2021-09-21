@@ -106,17 +106,27 @@ class DListTest(unittest.TestCase):
 
         items.extend([4, 6, 7, 2, 1, 7, 0])
 
-        # Checks it returns the correct item
-        del items[3]
-        self.assertEqual(items[3], 1)
-        del items[-5]
-        self.assertEqual(items[-5], 2)
-        self.assertEqual(items[5], 8)
-        self.assertEqual(items[2], 5)
+        # Checks the item is successfully deleted
+        del items[-7]
+        del items[5]
+        del items[2]
+        del items[0]
+
+        self.checkList(items, [7, 1, 7])
 
 
 
 # clear() Tests
+
+    def testClear(self):
+
+        items = DList()
+        items.extend([8, 4, 2, 4, 1, 6, 8])
+
+        items.clear()
+
+        self.checkList(items, [])
+
 # ----------------------------------------------------------------------
 
 # insert() Tests

@@ -4,5 +4,9 @@ a = DList()
 
 a.extend([4, 6, 7, 2, 1, 7, 0])
 
-del a[-6]
+del a[-7]
+
+
+for i in a:
+    print(i)
 
