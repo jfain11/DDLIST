@@ -240,6 +240,20 @@ class DListTest(unittest.TestCase):
 # ----------------------------------------------------------------------
 
 # extend() Tests
+
+    def testExtend(self):
+        items = DList()
+        items.extend([8, 1, 4, 6])
+        self.checkList(items, [8, 1, 4, 6])
+
+        items.extend(items)
+        self.checkList(items, [8, 1, 4, 6, 8, 1, 4, 6])
+
+        items.clear()
+
+        items.extend([5])
+        items.extend((3, 3, 1, 4))
+        self.checkList(items, [5, 3, 3, 1, 4])
 # ----------------------------------------------------------------------
 
 
