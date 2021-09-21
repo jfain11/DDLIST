@@ -62,21 +62,28 @@ class DList:
         :param position: index from -length to length -1; raises IndexError if position out of range
         :return: node at the specified position or raises IndexError if position is out of range
         """
-
+        # if position is out of range, raises IndexError
         if position > self.size - 1:
             raise IndexError
         elif position < self.size - (self.size * 2):
             raise IndexError
 
+        # retrieves the node at the list
         currentNode = self.head
+        # initializes an accumulator for the index
         currentIndex = 0
+
+        # if the position is negative, then makes the currentIndex 0 - size
         if position < 0:
             currentIndex = 0 - self.size
 
+        # loops through each node in the list
         for i in range(self.size):
+            # if the position and currentIndex match, then return the node
             if currentIndex == position:
                 return currentNode
 
+            # if they don't match, then move on to the next node and increment currentIndex
             else:
                 currentIndex += 1
                 currentNode = currentNode.next
@@ -88,7 +95,9 @@ class DList:
         :param position: index to get the item at; raises IndexError if position out of range
         :return: item at the index specified by the position
         """
+        # uses _find to retrieve the node at the position
         node = self._find(position)
+        # returns the item stored in the node
         return node.item
 
     # ------------------------------------------------------------------
@@ -100,7 +109,9 @@ class DList:
         :param value: value to put at the position
         :return: None
         """
+        # calls _find to retrieve the node at the position
         node = self._find(position)
+        # changes the value of the node
         node.item = value
 
     # ------------------------------------------------------------------
@@ -111,6 +122,7 @@ class DList:
         :param position: index of item/node to delete
         :return: None
         """
+        # calls _delete to remove the node
         a = self._delete(position)
 
     # ------------------------------------------------------------------
@@ -122,7 +134,7 @@ class DList:
         :param position:index of item/node to delete
         :return: the value at the specified position that was removed
         """
-
+        # if the position is out of range, then raise IndexError
         if position < 0 - self.size or position > self.size - 1:
             raise IndexError
 
@@ -146,6 +158,8 @@ class DList:
             self.tail = tempNode
             self.size -= 1
 
+
+        # else if removing from the middle of the list
         else:
             prevNode = node.prev
             nextNode = node.next
@@ -155,6 +169,7 @@ class DList:
             nextNode.prev = prevNode
             self.size -= 1
 
+        # return the item that was removed
         return item
 
 
@@ -245,10 +260,14 @@ class DList:
         :param position: index to remove at
         :return: value that was removed
         """
+
+        # if the position parameter is not given, then remove the node from the end of the list.
         if position == -1:
             position = self.size - 1
 
+        # calls _delete to remove the node
         item = self._delete(position)
+        # returns the item that was removed
         return item
 
     # ------------------------------------------------------------------
@@ -272,18 +291,29 @@ class DList:
         :param start: the non-negative starting index to start searching for x
         :return: the non-negative index of the first copy of x at location start or later in the list
         """
+        # index accumulator
         index = 0
+
+        # retrieves the node at the head
         node = self.head
+
+        # loops through each node in the list
         for i in range(self.size):
 
             if index > 0:
                 node = node.next
 
+            # if the item is found and the index is after or equal to the starting point
             if node.item == x and index >= start:
+                # return the correct index
                 return index
+
+            # if it isn't found, increment index and loop again
             else:
                 index += 1
 
+        # if item not in list, return -1
+        # used specifically in remove()
         return - 1
 
 

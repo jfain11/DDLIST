@@ -175,24 +175,68 @@ class DListTest(unittest.TestCase):
         with self.assertRaises(IndexError):
             e = items.pop(-9)
 
-
-
-
-
-
-
-
-
-
 # ----------------------------------------------------------------------
 
 # remove() Tests
+
+    def testRemove(self):
+        items = DList()
+        items.extend([9, 4, 8, 3, 2, 6, 7])
+
+        items.remove(9)
+        self.checkList(items, [4, 8, 3, 2, 6, 7])
+
+        items.remove(2)
+        self.checkList(items, [4, 8, 3, 6, 7])
+
+        items.remove(7)
+        self.checkList(items, [4, 8, 3, 6])
+
+        with self.assertRaises(ValueError):
+            items.remove(1)
+
+        with self.assertRaises(ValueError):
+            items.remove(20)
+
 # ----------------------------------------------------------------------
 
 # index() Tests
+    def testIndex(self):
+        items = DList()
+        items.extend([9, 3, 1, 0, 14, 7, 3])
+
+        index = items.index(9)
+        self.assertEqual(index, 0)
+
+        index = items.index(3)
+        self.assertEqual(index, 1)
+
+        index = items.index(3, 5)
+        self.assertEqual(index, 6)
+
+        index = items.index(14)
+        self.assertEqual(index, 4)
+
 # ----------------------------------------------------------------------
 
 # count() Tests
+
+    def testCount(self):
+        items = DList()
+        items.extend([9, 2, 5, 1, 9, 9, 2, 14, 7, 0])
+
+        a = items.count(9)
+        self.assertEqual(a, 3)
+
+        a = items.count(2)
+        self.assertEqual(a, 2)
+
+        a = items.count(0)
+        self.assertEqual(a, 1)
+
+        a = items.count(4)
+        self.assertEqual(a, 0)
+
 # ----------------------------------------------------------------------
 
 # extend() Tests
